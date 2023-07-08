@@ -124,7 +124,7 @@ public class CharacterController2D : MonoBehaviour
         animator.SetBool(animatorFristLandingBool, firstLanding);
         if (firstLanding)
         {
-            FindObjectOfType<SoulOrb>().DelayShowOrb(0);
+            //FindObjectOfType<SoulOrb>().DelayShowOrb(0);
         }
     }
 
