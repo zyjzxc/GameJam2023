@@ -15,6 +15,7 @@ public class CharacterData : MonoBehaviour
     [SerializeField] private float ClambScore = 1;
     [SerializeField] private float JumpAgainScore = 2;
     [SerializeField] private float RushScore = 3;
+    [SerializeField] private int HealthRestore = 20;
 
     private GameManager gameManager;
     private CharacterEffect effecter;
@@ -39,6 +40,7 @@ public class CharacterData : MonoBehaviour
     public void AddScore()
     {
         score++;
+        health = Math.Min(health + HealthRestore, healthMax);
     }
 
     public int GetScore()
