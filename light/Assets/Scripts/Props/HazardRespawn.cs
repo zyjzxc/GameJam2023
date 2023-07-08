@@ -61,15 +61,15 @@ public class HazardRespawn : MonoBehaviour
         yield return new WaitForSeconds(2f);
         if (data.GetDeadStatement())
         {
-            soulOrb.HideSoulOrb();
-            soulOrb.HideHealthItems();
+            // soulOrb.HideSoulOrb();
+            // soulOrb.HideHealthItems();
             character.transform.position = respawnPos.position;
             data.SetRespawnData(5);
             crossFader.FadeIn();
             character.PlayRespawnAnimation();
         }
         yield return new WaitForSeconds(3f);
-        soulOrb.ShowSoulOrb();
+        // soulOrb.ShowSoulOrb();
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Hero Detector"), LayerMask.NameToLayer("Enemy Detector"), false);
     }
 
@@ -80,8 +80,8 @@ public class HazardRespawn : MonoBehaviour
         yield return new WaitForSeconds(2f);
         if (data.GetDeadStatement())
         {
-            soulOrb.HideSoulOrb();
-            soulOrb.HideHealthItems();
+            // soulOrb.HideSoulOrb();
+            // soulOrb.HideHealthItems();
             character.transform.position = respawnPos.position;
             data.SetRespawnData(5);
             crossFader.FadeIn();
@@ -89,7 +89,7 @@ public class HazardRespawn : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         caveSpikes.isTrigger = false;
-        soulOrb.ShowSoulOrb();
+        // soulOrb.ShowSoulOrb();
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Hero Detector"), LayerMask.NameToLayer("Enemy Detector"), false);
     }
 

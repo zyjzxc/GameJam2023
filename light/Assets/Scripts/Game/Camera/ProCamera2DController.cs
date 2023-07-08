@@ -26,7 +26,7 @@ public class ProCamera2DController : MonoBehaviour
 
     private void Start()
     {
-        soulOrb.ShowSoulOrb();
+        // soulOrb.ShowSoulOrb();
         camera2d.AddCameraTarget(player, 1, 1);
     }
 }
