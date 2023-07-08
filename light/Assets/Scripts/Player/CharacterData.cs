@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CharacterData : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class CharacterData : MonoBehaviour
     [SerializeField] private bool isDead;
     [SerializeField] private int healthMax = 100;
     [SerializeField] private float healthSubGap = 3;
+    [SerializeField] private float ClambScore = 1;
+    [SerializeField] private float JumpAgainScore = 2;
+    [SerializeField] private float RushScore = 3;
 
     private GameManager gameManager;
     private CharacterEffect effecter;
@@ -17,6 +22,8 @@ public class CharacterData : MonoBehaviour
 
     private bool isLeak;
     private float timeSum;
+    private bool stopHealthSub;
+    private int score;
 
     private void Start()
     {
@@ -25,6 +32,37 @@ public class CharacterData : MonoBehaviour
         effecter = FindObjectOfType<CharacterEffect>();
         timeSum = 0;
         health = healthMax;
+        stopHealthSub = false;
+        score = 0;
+    }
+
+    public void AddScore()
+    {
+        score++;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public bool CanClamb()
+    {
+        return score >= ClambScore;
+    }
+
+    public bool CanJumpAgain()
+    {
+        return score >= JumpAgainScore;
+    }
+    public bool CanRush()
+    {
+        return score >= RushScore;
+    }
+
+    public void SetStopHealthSub(bool x)
+    {
+        stopHealthSub = x;
     }
 
     private void Update()
@@ -35,11 +73,14 @@ public class CharacterData : MonoBehaviour
 
     private void FixedUpdate()
     {
-        timeSum += Time.fixedDeltaTime;
-        if (timeSum >= healthSubGap)
+        if (!stopHealthSub)
         {
-            health -= 1;
-            timeSum -= healthSubGap;
+            timeSum += Time.fixedDeltaTime;
+            if (timeSum >= healthSubGap)
+            {
+                health -= 1;
+                timeSum -= healthSubGap;
+            }
         }
     }
 
@@ -95,11 +136,10 @@ public class CharacterData : MonoBehaviour
 
     public void SetRespawnData(int health)
     {
-        if (health > 0)
-        {
-            this.health = healthMax;
-            animator.ResetTrigger("Dead");
-            isDead = false;
-        }
+        this.health = healthMax;
+        animator.ResetTrigger("Dead");
+        isDead = false;
+        stopHealthSub = false;
+        score = 0;
     }
 }
