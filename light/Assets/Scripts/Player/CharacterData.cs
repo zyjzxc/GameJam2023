@@ -118,6 +118,12 @@ public class CharacterData : MonoBehaviour
         return health;
     }
 
+    public float GetCurrentHealthRate()
+    {
+        if (healthMax == 0) return 1.0f;
+        return health * 1f / healthMax;
+    }
+
     public bool GetDeadStatement()
     {
         CheckIsDead();
