@@ -190,7 +190,7 @@ public class CharacterController2D : MonoBehaviour
                     // Play audio
                     audioEffectPlayer.Play(CharacterAudio.AudioType.Jump, true);
                 }
-                else if (jumpCount == 2)
+                else if (jumpCount == 2 && data.CanJumpAgain())
                 {
                     animator.SetTrigger(animatorDoubleJumpTrigger);
                     effecter.DoEffect(CharacterEffect.EffectType.DoubleJump, true);
@@ -534,6 +534,8 @@ public class CharacterController2D : MonoBehaviour
     void Sprint(InputAction.CallbackContext context)
     {
         if(isSprinting)
+            return;
+        if (!data.CanRush())
             return;
         StartCoroutine(ApplySprint());
     }
