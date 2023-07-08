@@ -19,6 +19,7 @@ public class ScoreTrigger : MonoBehaviour
         {
             triggerd = true;
             data.AddScore();
+            Destroy(gameObject);
         }
     }
 }
