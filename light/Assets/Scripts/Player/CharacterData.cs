@@ -75,7 +75,7 @@ public class CharacterData : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!stopHealthSub)
+        if (!stopHealthSub && health > 0)
         {
             timeSum += Time.fixedDeltaTime;
             if (timeSum >= healthSubGap)

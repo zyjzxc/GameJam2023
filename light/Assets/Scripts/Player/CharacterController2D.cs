@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -48,12 +49,15 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float maxComboDelay = 0.4f;
     [Tooltip("攻击按键间隔时间")]
     [SerializeField] float slashIntervalTime = 0.2f;
+    [Tooltip("冲刺按键间隔时间")]
+    [SerializeField] float rushIntervalTime = 1f;
 
     [Header("攻击数值参数")]
     [SerializeField] int slashDamage;
 
     private int slashCount;
     private float lastSlashTime;
+    private float lastRushTime;
 
     private bool isOnGround;
     private bool isFacingLeft;
@@ -537,6 +541,11 @@ public class CharacterController2D : MonoBehaviour
             return;
         if (!data.CanRush())
             return;
+        if (Time.time < lastRushTime + rushIntervalTime)
+        {
+            return;
+        }
+        lastRushTime = Time.time;
         StartCoroutine(ApplySprint());
     }
 
