@@ -26,6 +26,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float wallJumpForce = 0.0f;
     [SerializeField] float wallReactingForce = 0.0f;
     [SerializeField] float recoilForce = 0.0f;
+    [SerializeField] float sprintForce = 0.0f;
     [SerializeField] float downRecoilForce = 0.0f;
     [SerializeField] float hurtForce = 0.0f;
     [SerializeField] float maxGravityVelocity = 10.0f;
@@ -58,6 +59,7 @@ public class CharacterController2D : MonoBehaviour
     private bool isFacingLeft;
     private bool isJumping;
     private bool isSliding;
+    private bool isSprinting;
     private bool isFalling;
 
     [Header("其他参数")]
@@ -86,9 +88,9 @@ public class CharacterController2D : MonoBehaviour
         InputManager.InputControl.GamePlayer.Jump.started += Jump_started;
         InputManager.InputControl.GamePlayer.Jump.performed += Jump_performed;
         InputManager.InputControl.GamePlayer.Jump.canceled += Jump_canceled;
-        InputManager.InputControl.GamePlayer.Attack.started += Attack_started;
-        InputManager.InputControl.GamePlayer.Attack.performed += Attack_performed;
-        InputManager.InputControl.GamePlayer.Attack.canceled += Attack_canceled;
+        InputManager.InputControl.GamePlayer.Attack.started += Sprint;
+        //InputManager.InputControl.GamePlayer.Attack.performed += Attack_performed;
+        //InputManager.InputControl.GamePlayer.Attack.canceled += Attack_canceled;
     }
 
     private void OnDisable()
@@ -96,9 +98,9 @@ public class CharacterController2D : MonoBehaviour
         InputManager.InputControl.GamePlayer.Jump.started -= Jump_started;
         InputManager.InputControl.GamePlayer.Jump.performed -= Jump_performed;
         InputManager.InputControl.GamePlayer.Jump.canceled -= Jump_canceled;
-        InputManager.InputControl.GamePlayer.Attack.started -= Attack_started;
-        InputManager.InputControl.GamePlayer.Attack.performed -= Attack_performed;
-        InputManager.InputControl.GamePlayer.Attack.canceled -= Attack_canceled;
+        InputManager.InputControl.GamePlayer.Attack.started -= Sprint;
+        //InputManager.InputControl.GamePlayer.Attack.performed -= Attack_performed;
+        //InputManager.InputControl.GamePlayer.Attack.canceled -= Attack_canceled;
     }
 
     private void Start()
@@ -135,6 +137,11 @@ public class CharacterController2D : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isSprinting)
+        {
+            controllerRigidbody.gravityScale = 0;
+            return;
+        }
         UpdateVelocity();
         UpdateDirection();
         UpdateJump();
@@ -164,7 +171,7 @@ public class CharacterController2D : MonoBehaviour
     {
         if (data.GetDeadStatement())
             return;
-        if (isSliding && !isOnGround)
+        if (isSliding && !isOnGround && !isSprinting)
         {
             StartCoroutine(GrabWallJump());
         }
@@ -522,6 +529,40 @@ public class CharacterController2D : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
         canMove = true;
+    }
+
+    void Sprint(InputAction.CallbackContext context)
+    {
+        if(isSprinting)
+            return;
+        StartCoroutine(ApplySprint());
+    }
+
+    IEnumerator ApplySprint()
+    {
+        canMove = false;
+        isSprinting = true;
+        
+        JumpCancel();
+        var gravity = controllerRigidbody.gravityScale;
+        enableGravity = false;
+        controllerRigidbody.gravityScale = 0;
+        if (!isFacingLeft)
+        {
+            //controllerRigidbody.AddForce(Vector2.right * sprintForce, ForceMode2D.Force);
+            controllerRigidbody.velocity = Vector2.right * sprintForce;
+        }
+        else
+        {
+            //controllerRigidbody.AddForce(Vector2.left * sprintForce, ForceMode2D.Force);
+            controllerRigidbody.velocity = Vector2.left * sprintForce;
+        }
+        yield return new WaitForSeconds(0.2f);
+        controllerRigidbody.gravityScale = gravity;
+        enableGravity = true;
+        canMove = true;
+        isSprinting = false;
+        controllerRigidbody.velocity = Vector2.zero;
     }
 
     /// <summary>
