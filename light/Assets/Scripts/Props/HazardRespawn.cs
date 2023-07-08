@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class HazardRespawn : MonoBehaviour
 {
-    public HazardRespawnTrigger hazardRespawnTrigger;
     public Transform respawnPos;
     [SerializeField] private bool needToReload;
 
@@ -23,16 +22,24 @@ public class HazardRespawn : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         soulOrb = FindObjectOfType<SoulOrb>();
     }
+
+
+    IEnumerator DoRespawnNearNotReload()
+    {
+        gameManager.SetEnableInput(false);
+        character.PlayHurt();
+        yield return new WaitForSeconds(0.5f);
+        character.transform.position = respawnPos.position;
+    }
+
+    public void RespawnNearNotReload()
+    {
+        StartCoroutine(DoRespawnNearNotReload());
+    }
+
     public void Respawn()
     {
-        if (needToReload)
-        {
-            StartCoroutine(ReloadAsyncScene());
-        }
-        else
-        {
-            StartCoroutine(DelayRespawn());
-        }
+        StartCoroutine(ReloadAsyncScene());
     }
 
     IEnumerator ReloadAsyncScene()

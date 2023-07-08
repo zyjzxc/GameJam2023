@@ -1,8 +1,6 @@
 ﻿using Com.LuisPedroFonseca.ProCamera2D;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -144,7 +142,6 @@ public class CharacterController2D : MonoBehaviour
         if (isSprinting)
         {
             controllerRigidbody.gravityScale = 0;
-            return;
         }
         UpdateVelocity();
         UpdateDirection();
@@ -669,6 +666,11 @@ public class CharacterController2D : MonoBehaviour
     public void PlayRespawnAnimation()
     {
         animator.SetTrigger(animatorRespawnTrigger);
+    }
+
+    public void PlayHurt() {
+        controllerRigidbody.velocity = new Vector2(0f, controllerRigidbody.velocity.y);
+        animator.Play("Damage");
     }
 
     public bool GetIsOnGround()

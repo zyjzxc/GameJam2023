@@ -16,7 +16,7 @@ public class DamageTrigger : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Hero Detector"))
         {
-            hazardRespawn.Respawn();
+            hazardRespawn.RespawnNearNotReload();
         }
     }
 }
