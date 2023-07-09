@@ -313,9 +313,10 @@ public class CharacterController2D : MonoBehaviour
 
             if (canMove && gameManager.IsEnableInput())
             {
-                float vx = (vectorInput.x) * maxSpeed + curExtraVx;
+                float vxInput = (vectorInput.x) * maxSpeed;
+                float vx = vxInput  + curExtraVx;
                 controllerRigidbody.velocity = new Vector2(vx, velocity.y);
-                animator.SetInteger(animatorMovementSpeed, (int)vx);
+                animator.SetInteger(animatorMovementSpeed, (int)vxInput);
             }
         }
         else
