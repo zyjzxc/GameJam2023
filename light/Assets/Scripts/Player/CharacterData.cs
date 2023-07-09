@@ -16,6 +16,7 @@ public class CharacterData : MonoBehaviour
     [SerializeField] private float JumpAgainScore = 2;
     [SerializeField] private float RushScore = 3;
     [SerializeField] private int HealthRestore = 20;
+    [SerializeField] private int HealthInit = 50;
 
     private GameManager gameManager;
     private CharacterEffect effecter;
@@ -32,7 +33,7 @@ public class CharacterData : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         effecter = FindObjectOfType<CharacterEffect>();
         timeSum = 0;
-        health = healthMax;
+        health = HealthInit;
         stopHealthSub = false;
         score = 0;
     }
@@ -144,7 +145,7 @@ public class CharacterData : MonoBehaviour
 
     public void SetRespawnData(int health)
     {
-        this.health = healthMax;
+        this.health = HealthInit;
         animator.ResetTrigger("Dead");
         isDead = false;
         stopHealthSub = false;
