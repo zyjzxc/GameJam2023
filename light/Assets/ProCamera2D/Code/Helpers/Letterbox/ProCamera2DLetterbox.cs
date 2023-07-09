@@ -22,7 +22,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         Material material
         {
             get
-            {
+            {   
                 if (_material != null) return _material;
 
                 _material = new Material(Shader.Find("Hidden/ProCamera2D/Letterbox")) {hideFlags = HideFlags.HideAndDontSave};

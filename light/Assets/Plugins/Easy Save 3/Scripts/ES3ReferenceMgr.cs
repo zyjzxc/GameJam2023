@@ -113,15 +113,15 @@ public class ES3ReferenceMgr : ES3ReferenceMgrBase, ISerializationCallbackReceiv
         var type = obj.GetType();
 
         // Check if any of the hide flags determine that it should not be saved.
-        if ((((obj.hideFlags & HideFlags.DontSave) == HideFlags.DontSave) || 
-		     ((obj.hideFlags & HideFlags.DontSaveInBuild) == HideFlags.DontSaveInBuild) ||
-		     ((obj.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor) ||
-		     ((obj.hideFlags & HideFlags.HideAndDontSave) == HideFlags.HideAndDontSave)))
-		{
-			// Meshes are marked with HideAndDontSave, but shouldn't be ignored.
-			if(type == typeof(Mesh) || type == typeof(Material))
-				return true;
-        }
+  //      if ((((obj.hideFlags & HideFlags.DontSave) == HideFlags.DontSave) || 
+		//     ((obj.hideFlags & HideFlags.DontSaveInBuild) == HideFlags.DontSaveInBuild) ||
+		//     ((obj.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor) ||
+		//     ((obj.hideFlags & HideFlags.HideAndDontSave) == HideFlags.HideAndDontSave)))
+		//{
+		//	// Meshes are marked with HideAndDontSave, but shouldn't be ignored.
+		//	if(type == typeof(Mesh) || type == typeof(Material))
+		//		return true;
+  //      }
 
         // Exclude the Easy Save 3 Manager, and all components attached to it.
         if (obj.name == "Easy Save 3 Manager")
