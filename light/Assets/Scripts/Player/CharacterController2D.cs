@@ -82,6 +82,9 @@ public class CharacterController2D : MonoBehaviour
 
     private float counter;
 
+    public delegate void TriggerInteration();
+    public TriggerInteration TriggerInterationFunc;
+
     public void SetExtraVx(float vx)
     {
         curExtraVx = vx;
@@ -98,6 +101,7 @@ public class CharacterController2D : MonoBehaviour
         InputManager.InputControl.GamePlayer.Jump.performed += Jump_performed;
         InputManager.InputControl.GamePlayer.Jump.canceled += Jump_canceled;
         InputManager.InputControl.GamePlayer.Attack.started += Sprint;
+        InputManager.InputControl.GamePlayer.InterActive.started += InteractionCallback;
         //InputManager.InputControl.GamePlayer.Attack.performed += Attack_performed;
         //InputManager.InputControl.GamePlayer.Attack.canceled += Attack_canceled;
     }
@@ -108,6 +112,7 @@ public class CharacterController2D : MonoBehaviour
         InputManager.InputControl.GamePlayer.Jump.performed -= Jump_performed;
         InputManager.InputControl.GamePlayer.Jump.canceled -= Jump_canceled;
         InputManager.InputControl.GamePlayer.Attack.started -= Sprint;
+        InputManager.InputControl.GamePlayer.InterActive.started -= InteractionCallback;
         //InputManager.InputControl.GamePlayer.Attack.performed -= Attack_performed;
         //InputManager.InputControl.GamePlayer.Attack.canceled -= Attack_canceled;
     }
@@ -169,6 +174,18 @@ public class CharacterController2D : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         UpdateGrounding(collision, true);
+    }
+
+    #endregion
+
+    #region Interaction
+    private void InteractionCallback(InputAction.CallbackContext context)
+    {
+        Debug.Log("press f");
+        if (TriggerInterationFunc != null)
+        {
+            TriggerInterationFunc();
+        }
     }
 
     #endregion
@@ -542,6 +559,7 @@ public class CharacterController2D : MonoBehaviour
 
     void Sprint(InputAction.CallbackContext context)
     {
+        Debug.Log("press x");
         if(isSprinting)
             return;
         if (!data.CanRush())

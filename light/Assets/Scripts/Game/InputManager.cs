@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         InputControl.GamePlayer.Movement.Enable();
         InputControl.GamePlayer.Jump.Enable();
         InputControl.GamePlayer.Attack.Enable();
+        InputControl.GamePlayer.InterActive.Enable();
         InputControl.UI.Navigate.Enable();
         InputControl.UI.Submit.Enable();
         

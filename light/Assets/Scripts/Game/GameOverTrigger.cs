@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
-public class ScoreTrigger : MonoBehaviour
+public class GameOverTrigger : MonoBehaviour
 {
     private CharacterData data;
     private CharacterController2D control;
+    private HazardRespawn respawn;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         data = FindObjectOfType<CharacterData>();
         control = FindObjectOfType<CharacterController2D>();
+        respawn = FindObjectOfType<HazardRespawn>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,7 +37,8 @@ public class ScoreTrigger : MonoBehaviour
     public void Interaction()
     {
         control.TriggerInterationFunc -= Interaction;
-        data.AddScore();
+        gameManager.SetEnableInput(false);
+        respawn.Respawn();
         Destroy(gameObject);
     }
 }
