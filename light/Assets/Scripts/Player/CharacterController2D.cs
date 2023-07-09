@@ -34,6 +34,8 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float slidingGravityScale = 1.0f;
     [SerializeField] float groundedGravityScale = 1.0f;
 
+    private float curExtraVx = 0;
+
     [Header("层级")]
     [SerializeField] LayerMask whatIsOnGround;
 
@@ -79,6 +81,11 @@ public class CharacterController2D : MonoBehaviour
     private int animatorRespawnTrigger;
 
     private float counter;
+
+    public void SetExtraVx(float vx)
+    {
+        curExtraVx = vx;
+    }
 
     public bool canMove { get; set; }
 
@@ -283,8 +290,9 @@ public class CharacterController2D : MonoBehaviour
 
             if (canMove && gameManager.IsEnableInput())
             {
-                controllerRigidbody.velocity = new Vector2(vectorInput.x * maxSpeed, velocity.y);
-                animator.SetInteger(animatorMovementSpeed, (int)vectorInput.x);
+                float vx = (vectorInput.x) * maxSpeed + curExtraVx;
+                controllerRigidbody.velocity = new Vector2(vx, velocity.y);
+                animator.SetInteger(animatorMovementSpeed, (int)vx);
             }
         }
         else
