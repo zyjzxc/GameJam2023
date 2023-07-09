@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class ScoreTrigger : MonoBehaviour
@@ -8,10 +9,12 @@ public class ScoreTrigger : MonoBehaviour
     private CharacterData data;
     private CharacterController2D control;
     // Start is called before the first frame update
+    private GameManager gameManager;
     void Start()
     {
         data = FindObjectOfType<CharacterData>();
         control = FindObjectOfType<CharacterController2D>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +37,14 @@ public class ScoreTrigger : MonoBehaviour
     {
         control.TriggerInterationFunc -= Interaction;
         control.PlayResumeInputAnimator("GetLightSpot");
+        StartCoroutine(Resume());
         data.AddScore();
         Destroy(gameObject);
+    }
+
+    IEnumerator Resume()
+    {
+        yield return new WaitForSeconds(3f);
+        gameManager.SetEnableInput(true);
     }
 }

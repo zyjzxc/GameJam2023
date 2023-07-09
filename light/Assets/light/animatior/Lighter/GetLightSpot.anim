@@ -31,7 +31,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.25
+        time: 0.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -51,17 +51,23 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -7854629474860912292, guid: 497248d7e59fb9148a3ac2da9b307045,
-        type: 3}
+      value: {fileID: 21300000, guid: 28d0f230926d74e148eb939da328876f, type: 3}
     - time: 0.083333336
-      value: {fileID: 1692577817029316766, guid: 497248d7e59fb9148a3ac2da9b307045,
-        type: 3}
-    - time: 0.16666667
-      value: {fileID: 7902016671040685316, guid: 497248d7e59fb9148a3ac2da9b307045,
-        type: 3}
+      value: {fileID: 21300000, guid: 9dba3038dc59347f694482d50016d277, type: 3}
     - time: 0.25
-      value: {fileID: -5657879152074187224, guid: 497248d7e59fb9148a3ac2da9b307045,
-        type: 3}
+      value: {fileID: 21300000, guid: 3a0b011865152446cb52d4cd9580df62, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: c5e665b639223441788258e4ecd2e251, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: 918408131b1f24bfa8eb822409dff7e6, type: 3}
+    - time: 0.8333333
+      value: {fileID: 21300000, guid: 6a4744d8e377d4d6d82caa8f06043b3d, type: 3}
+    - time: 1.0833334
+      value: {fileID: 21300000, guid: 3a0b011865152446cb52d4cd9580df62, type: 3}
+    - time: 1.3333334
+      value: {fileID: 21300000, guid: 9dba3038dc59347f694482d50016d277, type: 3}
+    - time: 1.5
+      value: {fileID: 21300000, guid: 28d0f230926d74e148eb939da328876f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -73,7 +79,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: 3e50b988225eebe4e826db8ef175d8ac, type: 3}
     - time: 0.083333336
       value: {fileID: 21300000, guid: c431ded79913ed94c84cb4030b3b713a, type: 3}
-    - time: 0.16666667
+    - time: 0.25
       value: {fileID: 21300000, guid: cc263aaa1cfacec41b4a96f9becc2839, type: 3}
     attribute: m_Sprite
     path: Effects/Damage Effect/Hit Crack
@@ -115,10 +121,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -7854629474860912292, guid: 497248d7e59fb9148a3ac2da9b307045, type: 3}
-    - {fileID: 1692577817029316766, guid: 497248d7e59fb9148a3ac2da9b307045, type: 3}
-    - {fileID: 7902016671040685316, guid: 497248d7e59fb9148a3ac2da9b307045, type: 3}
-    - {fileID: -5657879152074187224, guid: 497248d7e59fb9148a3ac2da9b307045, type: 3}
+    - {fileID: 21300000, guid: 28d0f230926d74e148eb939da328876f, type: 3}
+    - {fileID: 21300000, guid: 9dba3038dc59347f694482d50016d277, type: 3}
+    - {fileID: 21300000, guid: 3a0b011865152446cb52d4cd9580df62, type: 3}
+    - {fileID: 21300000, guid: c5e665b639223441788258e4ecd2e251, type: 3}
+    - {fileID: 21300000, guid: 918408131b1f24bfa8eb822409dff7e6, type: 3}
+    - {fileID: 21300000, guid: 6a4744d8e377d4d6d82caa8f06043b3d, type: 3}
+    - {fileID: 21300000, guid: 3a0b011865152446cb52d4cd9580df62, type: 3}
+    - {fileID: 21300000, guid: 9dba3038dc59347f694482d50016d277, type: 3}
+    - {fileID: 21300000, guid: 28d0f230926d74e148eb939da328876f, type: 3}
     - {fileID: 21300000, guid: 3e50b988225eebe4e826db8ef175d8ac, type: 3}
     - {fileID: 21300000, guid: c431ded79913ed94c84cb4030b3b713a, type: 3}
     - {fileID: 21300000, guid: cc263aaa1cfacec41b4a96f9becc2839, type: 3}
@@ -127,7 +138,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 1.5833334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -157,7 +168,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.25
+        time: 0.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -177,14 +188,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: PlayHitParticles
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.25
+  - time: 1.0833334
     functionName: ResumeInput
     data: 
     objectReferenceParameter: {fileID: 0}
