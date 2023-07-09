@@ -37,7 +37,7 @@ public class GameOverTrigger : MonoBehaviour
     public void Interaction()
     {
         control.TriggerInterationFunc -= Interaction;
-        gameManager.SetEnableInput(false);
+        control.PlayResumeInputAnimator("GameFinish");
         respawn.Respawn();
         Destroy(gameObject);
     }

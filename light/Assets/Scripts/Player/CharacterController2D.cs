@@ -144,6 +144,12 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
+    public void PlayResumeInputAnimator(string name)
+    {
+        gameManager.SetEnableInput(false);
+        animator.Play(name);
+    }
+
     private void Update()
     {
         ResetComboTimer();

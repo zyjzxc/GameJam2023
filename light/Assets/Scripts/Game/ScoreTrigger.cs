@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class ScoreTrigger : MonoBehaviour
     public void Interaction()
     {
         control.TriggerInterationFunc -= Interaction;
+        control.PlayResumeInputAnimator("GetLightSpot");
         data.AddScore();
         Destroy(gameObject);
     }
