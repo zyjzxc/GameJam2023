@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
+using TMPro;
 
 public class GameOverTrigger : MonoBehaviour
 {
+    public TextMeshProUGUI textUi;
+    public string text;
     private CharacterData data;
     private CharacterController2D control;
     private HazardRespawn respawn;
@@ -56,6 +59,7 @@ public class GameOverTrigger : MonoBehaviour
         control.PlayResumeInputAnimator("GameFinish");
         startTime = Time.time;
         fading = true;
+        textUi.text = text;
         //respawn.Respawn();
         //Destroy(gameObject);
     }
