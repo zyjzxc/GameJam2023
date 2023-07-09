@@ -218,7 +218,7 @@ public class CharacterController2D : MonoBehaviour
                 else if (jumpCount == 2 && data.CanJumpAgain())
                 {
                     animator.SetTrigger(animatorDoubleJumpTrigger);
-                    effecter.DoEffect(CharacterEffect.EffectType.DoubleJump, true);
+                    //effecter.DoEffect(CharacterEffect.EffectType.DoubleJump, true);
                     // Play audio
                     audioEffectPlayer.Play(CharacterAudio.AudioType.HeroWings, true);
                 }
