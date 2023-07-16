@@ -214,6 +214,8 @@ public class CharacterController2D : MonoBehaviour
             if (jumpCount <= 1)
             {
                 ++jumpCount;
+                if (!isOnGround)
+                    jumpCount = 2;
                 if (jumpCount == 1)
                 {
                     // Set animator
